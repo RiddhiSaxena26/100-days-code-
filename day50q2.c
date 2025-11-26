@@ -2,29 +2,23 @@
 #include <string.h>
 
 int main() {
-    char str[100];
-    
+    char str[200];
+
     printf("Enter a string: ");
     fgets(str, sizeof(str), stdin);
-    
-    // remove newline if present
-    size_t len = strlen(str);
-    if (str[len - 1] == '\n') {
-        str[len - 1] = '\0';
-        len--;
-    }
-    
-    printf("All substrings:\n");
-    
-    // generate substrings
+
+    // Remove newline character
+    str[strcspn(str, "\n")] = '\0';
+
+    int len = strlen(str);
+
+    printf("\nAll substrings:\n");
+
     for (int i = 0; i < len; i++) {
-        for (int j = i; j < len; j++) {
-            for (int k = i; k <= j; k++) {
-                printf("%c", str[k]);
-            }
-            printf("\n");
+        for (int j = 1; j <= len - i; j++) {
+            printf("%.*s\n", j, str + i);
         }
     }
-    
+
     return 0;
 }
